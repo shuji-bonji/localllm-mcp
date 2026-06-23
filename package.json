@@ -1,0 +1,59 @@
+{
+  "name": "@shuji-bonji/localllm-mcp",
+  "version": "0.1.0",
+  "description": "MCP server exposing a local LLM (neko8 LiteLLM / Ollama, OpenAI-compatible) to Claude as structured tools (chat / list_models)",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "localllm-mcp": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && shx chmod 755 build/index.js",
+    "prepublishOnly": "npm run build",
+    "dev": "tsx watch src/index.ts",
+    "start": "node build/index.js",
+    "test": "vitest run",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
+  },
+  "keywords": [
+    "mcp",
+    "llm",
+    "local-llm",
+    "ollama",
+    "litellm",
+    "openai-compatible",
+    "neko8"
+  ],
+  "author": "shuji-bonji",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuji-bonji/localllm-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shuji-bonji/localllm-mcp/issues"
+  },
+  "homepage": "https://github.com/shuji-bonji/localllm-mcp#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.13",
+    "@types/node": "^25.1.0",
+    "shx": "^0.4.0",
+    "tsx": "^4.22.3",
+    "typescript": "^5.9.3",
+    "vitest": "^3.0.5"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "README.ja.md",
+    "LICENSE"
+  ]
+}
