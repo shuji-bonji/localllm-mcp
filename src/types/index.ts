@@ -31,6 +31,8 @@ export interface ChatResult {
 export interface DelegateTaskArgs {
   /** neko8-coding-agent に委譲する自然言語のゴール */
   goal: string;
+  /** specialist の skillId (coding-task / domain-qa / translation。省略時はサーバ既定) */
+  skill?: string;
   /** A2A エージェントのベース URL（省略時 A2A_AGENT_URL） */
   agentUrl?: string;
 }

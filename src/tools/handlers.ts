@@ -40,7 +40,10 @@ export async function handleDelegateTask(args: DelegateTaskArgs): Promise<unknow
   if (typeof args.goal !== "string" || args.goal.trim().length === 0) {
     throw new Error("delegate_task: `goal`（非空文字列）が必要です");
   }
-  return delegateTask(args.goal, args.agentUrl);
+  if (args.skill !== undefined && (typeof args.skill !== "string" || args.skill.trim() === "")) {
+    throw new Error("delegate_task: `skill` は非空文字列で指定してください");
+  }
+  return delegateTask(args.goal, args.agentUrl, args.skill);
 }
 
 /**

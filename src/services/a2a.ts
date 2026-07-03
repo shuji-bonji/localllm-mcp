@@ -78,7 +78,11 @@ async function discoverRpcUrl(base: string): Promise<string> {
  * @param goal  自然言語のゴール (例: "この関数を async/await にリファクタして")
  * @param agentUrl  ベース URL。省略時は A2A_AGENT_URL
  */
-export async function delegateTask(goal: string, agentUrl?: string): Promise<DelegateTaskResult> {
+export async function delegateTask(
+  goal: string,
+  agentUrl?: string,
+  skill?: string,
+): Promise<DelegateTaskResult> {
   const base = (agentUrl ?? A2A_AGENT_URL).replace(/\/+$/, "");
   const rpcUrl = await discoverRpcUrl(base);
 
@@ -92,6 +96,8 @@ export async function delegateTask(goal: string, agentUrl?: string): Promise<Del
         messageId: crypto.randomUUID(),
         role: "user",
         parts: [{ kind: "text", text: goal }],
+        // specialist の経路選択 (router=Claude)。未指定はサーバ既定 (coding-task)
+        ...(skill ? { metadata: { skillId: skill } } : {}),
       },
     },
   });

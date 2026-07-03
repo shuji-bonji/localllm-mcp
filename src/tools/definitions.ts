@@ -58,13 +58,18 @@ export const tools: Tool[] = [
   {
     name: "delegate_task",
     description:
-      "neko8 の自律コーディングエージェント (A2A) にゴールを委譲する。chat と違い、手順の決定 (ツール選択・ラウンド数) は neko8 側が握る。単発補完で足りるなら chat を、自分で調べて多段で進めてほしいゴールなら delegate_task を使う。",
+      "neko8 のローカル specialist (A2A) にゴールを委譲する。chat と違い、手順の決定 (ツール選択・ラウンド数) は neko8 側が握る。単発補完で足りるなら chat を、自分で調べて多段で進めてほしいゴールなら delegate_task を使う。skill で specialist を選べる (経路選択は呼び出し側=Claude の責務)。",
     inputSchema: {
       type: "object",
       properties: {
         goal: {
           type: "string",
           description: "委譲する自然言語のゴール（例: この関数を async/await にリファクタして）",
+        },
+        skill: {
+          type: "string",
+          description:
+            "specialist の skillId。coding-task=コーディング支援（既定）/ domain-qa=自作MCP裏取りのドメインQ&A / translation=日英翻訳専門。一覧は Agent Card の skills 参照",
         },
         agentUrl: {
           type: "string",
